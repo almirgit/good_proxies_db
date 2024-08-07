@@ -28,9 +28,6 @@ func main() {
 	}
 	defer db.Close()
 
-	// Connection successful
-	//fmt.Println("Connected to the PostgreSQL database successfully!")
-
 	proxy_list := proxy_data_input.GetProxies(db)
 
 	// // Using a for loop with an index
@@ -39,6 +36,7 @@ func main() {
 	// }
 
 	check_proxies(proxy_list)
+	//TODO: check_stored_proxies
 
 	//logger.Debug(cfg.CheckURLEndPoint)
 }
