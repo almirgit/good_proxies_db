@@ -1,15 +1,16 @@
 package shared
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
-	"fmt"
 )
 
 // Config holds the overall configuration for the application
 type Config struct {
-	Database        DatabaseConfig `yaml:"database"`
-	CheckURLEndPoint string        `yaml:"CheckURLEndPoint"`
+	CheckURLEndPoint string         `yaml:"CheckURLEndPoint"`
+	Database_in      DatabaseConfig `yaml:"database_in"`
+	Database_out     DatabaseConfig `yaml:"database_out"`	
 }
 
 // DatabaseConfig holds the database-related configuration
@@ -17,6 +18,7 @@ type DatabaseConfig struct {
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
 	Host     string `yaml:"host"`
+	Port     string `yaml:"port"`
 	SSLMode  string `yaml:"sslmode"`
 	DBName   string `yaml:"dbname"`
 }
@@ -29,7 +31,7 @@ type Proxy struct {
 const LOG_FILE = "output.log"
 const FILE string = "good_proxies.db"
 
-//func Loginit(logfile *os.File) (*slog.Logger) {
+// func Loginit(logfile *os.File) (*slog.Logger) {
 func Loginit() (*slog.Logger, *os.File) {
 	logfile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 
@@ -47,7 +49,7 @@ func Loginit() (*slog.Logger, *os.File) {
 	return logger, logfile
 }
 
-//func hi(text string) (string) {
+// func hi(text string) (string) {
 func Hi() {
 	fmt.Println("Hi!")
 }
