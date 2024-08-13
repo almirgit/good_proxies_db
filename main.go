@@ -3,6 +3,7 @@ package main
 import (
 	"good_proxies_go_ai/config"
 	"good_proxies_go_ai/proxy_data_input"
+	"good_proxies_go_ai/proxy_data_output"
 	"good_proxies_go_ai/shared"
 )
 
@@ -10,7 +11,6 @@ func main() {
 
 	//LOG_FILE := os.Getenv("LOG_FILE")
 	logger, logfile := shared.Loginit()
-
 	defer logfile.Close() // executes on function exit
 
 	logger.Info("Start")
@@ -19,10 +19,11 @@ func main() {
 	cfg, err := config.LoadConfig(".config.yml")
 	if err != nil {
 		logger.Error("Error loading config: %v", err)
+		return
 	}
 
 	// Get the database connection
-	db, err := proxy_data_input.DBConnect(*cfg)
+	db, err := proxy_data_input.DBInConnect(*cfg)
 	if err != nil {
 		logger.Error("Error connecting to database: %v", err)
 	}
@@ -35,7 +36,7 @@ func main() {
 	// 	fmt.Println(proxy_list[i])
 	// }
 
-	check_proxies(proxy_list)
+	proxy_data_output.Check_proxies(*cfg, proxy_list)
 	//TODO: check_stored_proxies
 
 	//logger.Debug(cfg.CheckURLEndPoint)
