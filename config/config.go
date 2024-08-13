@@ -62,6 +62,18 @@ func validateConfig(config *shared.Config) error {
 	if strings.TrimSpace(config.Database_in.Password) == "" {
 		return fmt.Errorf("database password is required")
 	}
+	if strings.TrimSpace(config.Database_in.Host) == "" {
+		return fmt.Errorf("database host is required")
+	}
+	if strings.TrimSpace(config.Database_in.Port) == "" {
+		return fmt.Errorf("database port is required")
+	}	
+	if strings.TrimSpace(config.Database_in.SSLMode) == "" {
+		return fmt.Errorf("database sslmode is required")
+	}
+	if strings.TrimSpace(config.Database_in.DBName) == "" {
+		return fmt.Errorf("database name is required")
+	}
 	if strings.TrimSpace(config.CheckURLEndPoint) == "" {
 		return fmt.Errorf("CheckURLEndPoint is required")
 	}
