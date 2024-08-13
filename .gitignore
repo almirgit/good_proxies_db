@@ -1,0 +1,10 @@
+*.swp
+*.db
+*.log
+*.bak
+good_proxies_go
+.*config*
+
+go.mod
+go.sum
+old
