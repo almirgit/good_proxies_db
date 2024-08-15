@@ -28,6 +28,8 @@ type Proxy struct {
 	Proxy_port string `db:"proxy_port"`
 }
 
+var Log *slog.Logger
+var Logfile *os.File
 const LOG_FILE = "output.log"
 const FILE string = "good_proxies.db"
 
