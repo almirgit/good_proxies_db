@@ -3,17 +3,18 @@ package config
 import (
 	"fmt"
 	"good_proxies_go_ai/shared"
+	//"io/ioutil"
+
 	"gopkg.in/yaml.v3"
-	"io/ioutil"
+
 	//"log"
 	"os"
 	"strings"
 )
 
-
 // LoadConfig reads the YAML configuration file and returns a Config struct
 func LoadConfig(filename string) (*shared.Config, error) {
-	data, err := ioutil.ReadFile(filename)
+	data, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
