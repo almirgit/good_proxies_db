@@ -15,8 +15,6 @@ import (
 )
 
 func http_request(requestURL string, proxy_server_url string) (int) {
-	//requestURL := "https://static.kodera.hr"	
-	
 	//logger, _ := shared.Loginit()
 	proxyURL, _ := url.Parse(proxy_server_url)
 	proxy := http.ProxyURL(proxyURL)
