@@ -1,7 +1,6 @@
 package shared
 
 import (
-	"fmt"
 	"log/slog"
 	"os"
 )
@@ -10,7 +9,7 @@ import (
 type Config struct {
 	CheckURLEndPoint string         `yaml:"CheckURLEndPoint"`
 	Database_in      DatabaseConfig `yaml:"database_in"`
-	Database_out     DatabaseConfig `yaml:"database_out"`	
+	Database_out     DatabaseConfig `yaml:"database_out"`
 }
 
 // DatabaseConfig holds the database-related configuration
@@ -30,6 +29,7 @@ type Proxy struct {
 
 var Log *slog.Logger
 var Logfile *os.File
+
 const LOG_FILE = "output.log"
 const FILE string = "good_proxies.db"
 
@@ -52,6 +52,6 @@ func Loginit() (*slog.Logger, *os.File) {
 }
 
 // func hi(text string) (string) {
-func Hi() {
-	fmt.Println("Hi!")
-}
+// func Hi() {
+// 	fmt.Println("Hi!")
+// }
