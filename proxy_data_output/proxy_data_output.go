@@ -144,7 +144,7 @@ func Check_stored_proxies(db *sql.DB, config shared.Config) error {
 func remove_good_proxy(db *sql.DB, proxy_ip_port string) error {
 	// Prepare the DELETE query
 	idToDelete := proxy_ip_port
-	query := `DELETE FROM good_proxy WHERE proxy_ip_port = $1`
+	query := `DELETE FROM data.good_proxy WHERE proxy_ip_port = $1`
 
 	// Execute the DELETE query
 	//result, err := db.Exec(query, idToDelete)
