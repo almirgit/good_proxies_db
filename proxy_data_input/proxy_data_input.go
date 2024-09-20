@@ -10,7 +10,7 @@ import (
 
 // getDBData takes a DatabaseConfig object, opens a connection to the PostgreSQL database,
 // tests it, and returns the connection object.
-func DBInConnect(config shared.Config) (*sql.DB, error) {
+func PgDBConnect(config shared.Config) (*sql.DB, error) {
 	// Construct the PostgreSQL Data Source Name (DSN)
 	//dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=%s",
 	//	config.Database_in.Host, config.Database_in.Username, config.Database_in.Password, config.Database_in.DBName, config.Database_in.SSLMode)
@@ -35,20 +35,11 @@ func DBInConnect(config shared.Config) (*sql.DB, error) {
 	return db, nil
 }
 
-// func ReadProxies(db sql.DB) {
-// 	rows, err := db.Query("select proxy_ip, proxy_port from data.proxy_list pl order by moddate desc limit 1000")
-// 	defer rows.Close()
-// 	if err != nil {
-// 		slog.Error("Error: %v", err)
-// 	}
-// }
-
-func GetProxies(db *sql.DB) []string {
-	//logger, _ := shared.Loginit()
+func GetProxies(db *sql.DB) []string {	
 
 	//rows, err := db.Query("select proxy_ip, proxy_port from data.proxy_list pl order by moddate desc limit 1000")
 	rows, _ := db.Query("select proxy_ip, proxy_port from data.proxy_list pl order by moddate desc limit 1000")
-	defer rows.Close()
+	//defer rows.Close()
 	// if err != nil {
 	// 	logger.Error("Error: %v", err)
 	// }

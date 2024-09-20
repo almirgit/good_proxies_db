@@ -8,7 +8,7 @@ import (
 )
 
 func display_error(errmsg string, err error) {
-	shared.Log.Error(errmsg, "error", err)	
+	shared.Log.Error(errmsg, "error", err)
 }
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 	}
 
 	// Get the database connection
-	db, err := proxy_data_input.DBInConnect(*cfg)
+	db, err := proxy_data_input.PgDBConnect(*cfg)
 	if err != nil {
 		//logger.Error("Error connecting to database: %v", "error", err)
 		display_error("Error connecting to database", err)
@@ -44,8 +44,8 @@ func main() {
 	// 	fmt.Println(proxy_list[i])
 	// }
 
-	proxy_data_output.Check_proxies(*cfg, proxy_list)
-	//TODO: check_stored_proxies
+	proxy_data_output.Check_stored_proxies(db, *cfg)
+	proxy_data_output.Check_proxies(db, *cfg, proxy_list)	
 
 	//logger.Debug(cfg.CheckURLEndPoint)
 }
