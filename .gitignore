@@ -4,6 +4,7 @@
 *.bak
 good_proxies_go
 .*config*
+.*secret*
 
 go.mod
 go.sum
