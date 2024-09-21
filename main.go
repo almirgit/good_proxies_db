@@ -1,10 +1,10 @@
 package main
 
 import (
-	"good_proxies_go_ai/config"
-	"good_proxies_go_ai/proxy_data_input"
-	"good_proxies_go_ai/proxy_data_output"
-	"good_proxies_go_ai/shared"
+	"github.com/good_proxies_go_ai/config"
+	"github.com/good_proxies_go_ai/proxy_data_input"
+	"github.com/good_proxies_go_ai/proxy_data_output"
+	"github.com/good_proxies_go_ai/shared"
 )
 
 func display_error(errmsg string, err error) {

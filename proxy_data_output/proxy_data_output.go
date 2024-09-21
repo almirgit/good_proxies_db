@@ -6,8 +6,8 @@ import (
 	"log"
 
 	//"fmt"
-	//"good_proxies_go_ai/input"
-	"good_proxies_go_ai/shared"
+	//"github.com/good_proxies_go_ai/input"
+	"github.com/good_proxies_go_ai/shared"
 	//"log/slog"
 	"net/http"
 	"net/url"
