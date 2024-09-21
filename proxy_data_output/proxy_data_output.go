@@ -3,7 +3,6 @@ package proxy_data_output
 
 import (
 	"database/sql"
-	"log"
 
 	//"fmt"
 	//"good_proxies_db/input"
@@ -11,6 +10,7 @@ import (
 	//"log/slog"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -142,15 +142,35 @@ func Check_stored_proxies(db *sql.DB, config shared.Config) error {
 }
 
 func remove_good_proxy(db *sql.DB, proxy_ip_port string) error {
+	// Check if it can be deleted, if higher numbers of items than minimum
+	query := "SELECT count(*) cnt FROM data.good_proxy"
+
+	// Execute the query and get the result
+	var ret_val string
+	err := db.QueryRow(query).Scan(&ret_val)
+	if err != nil {
+		shared.Log.Error("QueryRow failed: %v\n", err)
+	}
+
+	// Print the result
+	shared.Log.Info("Number of proxies in DB", "cnt", ret_val)
+	var cnt int
+	cnt, err = strconv.Atoi(ret_val)
+
+	if cnt <= 5 { // TODO: parameter
+		shared.Log.Warn("Number of proxies in DB less than minimum. No Action", "cnt", ret_val)
+		return nil
+	}
+
 	// Prepare the DELETE query
 	idToDelete := proxy_ip_port
-	query := `DELETE FROM data.good_proxy WHERE proxy_ip_port = $1`
+	query = `DELETE FROM data.good_proxy WHERE proxy_ip_port = $1`
 
 	// Execute the DELETE query
 	//result, err := db.Exec(query, idToDelete)
-	_, err := db.Exec(query, idToDelete)
+	_, err = db.Exec(query, idToDelete)
 	if err != nil {
-		log.Fatal("Failed to execute DELETE query:", err)
+		shared.Log.Error("Failed to execute DELETE query:", err)
 	}
 
 	shared.Log.Debug("Proxy removed", "proxy_server", proxy_ip_port)
