@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"github.com/good_proxies_go_ai/shared"
+	"good_proxies_db/shared"
 	//"io/ioutil"
 
 	"gopkg.in/yaml.v3"

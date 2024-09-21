@@ -2,10 +2,10 @@
 *.db
 *.log
 *.bak
-good_proxies_go
+good_proxies_db
 .*config*
 .*secret*
 
 go.mod
 go.sum
-old
+*.old

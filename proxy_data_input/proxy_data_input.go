@@ -3,7 +3,7 @@ package proxy_data_input
 import (
 	"database/sql"
 	"fmt"
-	"github.com/good_proxies_go_ai/shared"
+	"good_proxies_db/shared"
 
 	_ "github.com/lib/pq" // Import the PostgreSQL driver
 )
