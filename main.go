@@ -1,14 +1,18 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"good_proxies_db/config"
 	"good_proxies_db/proxy_data_input"
 	"good_proxies_db/proxy_data_output"
 	"good_proxies_db/shared"
+	"os"
 )
 
 func display_error(errmsg string, err error) {
 	shared.Log.Error(errmsg, "error", err)
+	fmt.Fprintln(os.Stderr, errmsg)
 }
 
 func main() {
@@ -17,11 +21,14 @@ func main() {
 	shared.Log, shared.Logfile = shared.Loginit()
 	defer shared.Logfile.Close() // executes on function exit
 
+	configf := flag.String("config", ".config.yml", "Configuration file")
+	flag.Parse()
+	
 	for {
 		shared.Log.Info("Start processing cycle")
 
 		// Load configuration
-		cfg, err := config.LoadConfig(".config.yml")
+		cfg, err := config.LoadConfig(*configf)
 		if err != nil {
 			display_error("Error reading .config.yml", err)
 			//logger.Error("Error reading .config.yml", "error", err)
