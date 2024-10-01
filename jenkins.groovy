@@ -57,6 +57,7 @@ pipeline {
         stage('Systemd setup and start') {
             steps {
                 sh('scp -o StrictHostKeyChecking=no systemd/good_proxies_db.service almir@fra1.koderacloud.net:/tmp')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo mkdir -p /var/log/good_proxies_db && sudo chown freeproxy:freeproxy /var/log/good_proxies_db"')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo cp /tmp/good_proxies_db.service /usr/lib/systemd/system/good_proxies_db.service"')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl daemon-reload"')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl restart good_proxies_db.service"')
