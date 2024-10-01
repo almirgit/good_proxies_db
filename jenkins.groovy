@@ -50,14 +50,14 @@ pipeline {
         stage('Deploy binary') {
             steps {
                 sh('scp -o StrictHostKeyChecking=no good_proxies_db almir@fra1.koderacloud.net:/tmp')
-                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo mv /tmp/good_proxies_db /usr/local/bin"')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo cp /tmp/good_proxies_db /usr/local/bin"')
             }
         }
 
         stage('Systemd setup and start') {
             steps {
                 sh('scp -o StrictHostKeyChecking=no systemd/good_proxies_db.service almir@fra1.koderacloud.net:/tmp')
-                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo mv /tmp/good_proxies_db.service /usr/lib/systemd/system/nginx.service"')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo cp /tmp/good_proxies_db.service /usr/lib/systemd/system/good_proxies_db.service"')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl daemon-reload"')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl restart good_proxies_db.service"')
             }
