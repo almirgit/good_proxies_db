@@ -50,7 +50,7 @@ pipeline {
         stage('Deploy binary') {
             steps {
                 sh('scp -o StrictHostKeyChecking=no good_proxies_db almir@fra1.koderacloud.net:/tmp')
-                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo cp /tmp/good_proxies_db /usr/local/bin"')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo cp -f /tmp/good_proxies_db /usr/local/bin"')
             }
         }
 

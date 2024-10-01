@@ -8,8 +8,11 @@ User=freeproxy
 WorkingDirectory=/home/freeproxy/
 ExecStart=/usr/local/bin/good_proxies_db -config=/home/freeproxy/.config.yml
 #ExecReload=/bin/kill -s HUP $MAINPID
-StandardOutput=append:/var/log/freeproxy/good_proxies_db-stdout.log
-StandardError=append:/var/log/freeproxy/good_proxies_db-stderr.log
+#StandardOutput=append:/var/log/freeproxy/good_proxies_db-stdout.log
+#StandardError=append:/var/log/freeproxy/good_proxies_db-stderr.log
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=good_proxies_db
 Restart=always
 RestartSec=5
 
