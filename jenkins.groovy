@@ -58,8 +58,8 @@ pipeline {
             steps {
                 sh('scp -o StrictHostKeyChecking=no systemd/good_proxies_db.service almir@fra1.koderacloud.net:/tmp')
                 sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo mv /tmp/good_proxies_db.service /usr/lib/systemd/system/nginx.service"')
-                sh('sudo systemctl daemon-reload')
-                sh('sudo systemctl restart good_proxies_db.service')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl daemon-reload"')
+                sh('ssh -o StrictHostKeyChecking=no almir@fra1.koderacloud.net "sudo systemctl restart good_proxies_db.service"')
             }
         }
     }
