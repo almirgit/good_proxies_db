@@ -8,6 +8,14 @@ import (
 	"good_proxies_db/proxy_data_output"
 	"good_proxies_db/shared"
 	"os"
+
+	//"golang.org/x/text/language/display"
+)
+
+var (
+	// These variables will be set at build time using -ldflags
+	version   string
+	commitSHA string
 )
 
 func display_error(errmsg string, err error) {
@@ -22,7 +30,13 @@ func main() {
 	defer shared.Logfile.Close() // executes on function exit
 
 	configf := flag.String("config", ".config.yml", "Configuration file")
-	flag.Parse()
+	disp_version := flag.Bool("version", false, "Display version of the program")
+	flag.Parse()	
+
+	if *disp_version {
+		fmt.Printf("%s%s\n", version, commitSHA)
+		return
+	}
 	
 	for {
 		shared.Log.Info("Start processing cycle")

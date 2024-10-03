@@ -25,7 +25,7 @@ pipeline {
                         sh 'go mod tidy' // Ensure dependencies are installed
                         //sh 'chmod -R 777 /.cache' // Fix permissions
                         //sh 'GOROOT=`pwd`/.. go build -o good_proxies_db .'  // Build the Go binary
-                        sh 'go build -o good_proxies_db .'  // Build the Go binary
+                        sh 'go build -ldflags "-X main.version=$(git describe --tags) -X main.commitSHA=$(git rev-parse --short HEAD)" -o good_proxies_db'
                     }
                 }
             }
