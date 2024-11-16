@@ -56,7 +56,7 @@ func main() {
 			display_error("Error connecting to database", err)
 			return
 		}
-		defer db.Close()
+		//defer db.Close()
 
 		proxy_list := proxy_data_input.GetProxies(db)
 
@@ -67,6 +67,8 @@ func main() {
 
 		proxy_data_output.Check_proxies(db, *cfg, proxy_list)
 		proxy_data_output.Check_stored_proxies(db, *cfg)
+		
+		db.Close()
 	}
 
 }
