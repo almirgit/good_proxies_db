@@ -60,14 +60,9 @@ func main() {
 
 		proxy_list := proxy_data_input.GetProxies(db)
 
-		// // Using a for loop with an index
-		// for i := 0; i < len(proxy_list); i++ {
-		// 	fmt.Println(proxy_list[i])
-		// }
-
 		proxy_data_output.Check_proxies(db, *cfg, proxy_list)
 		proxy_data_output.Check_stored_proxies(db, *cfg)
-		
+
 		db.Close()
 	}
 
