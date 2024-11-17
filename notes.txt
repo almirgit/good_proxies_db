@@ -1,0 +1,5 @@
+2024-11-17
+hotfix/db-connections-bug
+  https://github.com/almirgit/good_proxies_db/issues/10
+
+  
