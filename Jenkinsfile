@@ -13,6 +13,9 @@
 // }
 pipeline {
     agent any
+    triggers {
+        pollSCM('H/2 * * * *') // Poll SCM every 2 minutes for changes
+    }
     environment {
         GO_VERSION = 'golang:1.22.0'  // Docker image for Go
         GOCACHE = "${WORKSPACE}/go-build-cache"  // Set GOCACHE to a writable directory
