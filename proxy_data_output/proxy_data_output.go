@@ -44,7 +44,7 @@ func http_request(requestURL string, proxy_server_url string) int {
 	return res.StatusCode
 }
 
-func Check_proxies(db *sql.DB, config shared.Config, dbdata []string) {
+func Check_proxies(db *sql.DB, config shared.Config, dbdata []string) { 
 
 	for _, proxy_server := range dbdata {
 		//fmt.Println(proxy_server)
@@ -58,7 +58,7 @@ func Check_proxies(db *sql.DB, config shared.Config, dbdata []string) {
 			if err != nil {
 				//fmt.Print(err) // this works, but looks like Errorf doesn't work
 				//fmt.Printf(os.Stderr, "Cannot write to sqlite DB file: %s\n", err)
-				shared.Log.Error("Cannot write to sqlite DB file", "error", err)
+				shared.Log.Error("Cannot write to destination", "error", err)
 				//fmt.Errorf("Cannot write to sqlite DB file: %s\n", err)
 			}
 		}
